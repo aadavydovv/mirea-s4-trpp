@@ -3,7 +3,6 @@ class ButtonNews:
     def action(country):
         import requests
 
-        # https://newsapi.org/v2/top-headlines?country=ru&apiKey=7bc1b015bc614813ad32a62accce3cd1
 
         if country == 'ru':
             request_result = requests.get(
