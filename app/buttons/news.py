@@ -22,6 +22,9 @@ class ButtonNews:
             for i in range(5):
                 article = request_result['articles'][i]
                 headline = '   ' + article['title']
-                output_string = output_string + "\n" + headline
+                if i != 0:
+                    output_string = output_string + "\n" + headline
+                else:
+                    output_string = output_string + headline
 
         return output_string
