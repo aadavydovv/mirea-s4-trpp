@@ -6,11 +6,11 @@ class ButtonWeather:
 
         #cretaing request to AerisAPI
         if country == 'de':
-            weather_string = 'Tommorow in Berlin, de: '
+            weather_string = 'Tommorow in Berlin: '
             request_result = requests.post('https://api.aerisapi.com/forecasts/berlin,de?filter=1d&limit=10&fields=periods.maxTempC,periods.weatherPrimary&client_id=YA2U5w6PHL8Z4MRkHLEeY&client_secret=lsb5pqlmCJEuNVkzvs4AwEVCkiWU14RdjFhUFOZX')
 
         elif country == 'ru':
-            weather_string = 'Tommorow in Moscow, Ru: '
+            weather_string = 'Tommorow in Moscow: '
             request_result = requests.post('https://api.aerisapi.com/forecasts/moscow,ru?filter=1d&limit=10&fields=periods.maxTempC,periods.weatherPrimary&client_id=YA2U5w6PHL8Z4MRkHLEeY&client_secret=lsb5pqlmCJEuNVkzvs4AwEVCkiWU14RdjFhUFOZX')
 
         #writes request as JSON-encoded content of responce
