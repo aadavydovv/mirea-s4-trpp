@@ -1,9 +1,24 @@
 class ButtonNews:
     @staticmethod
     def action(country):
+
+        '''
+        Returns formatted string with news
+
+        Returns formatted string with five news headlines from NEWS API.
+        Country of origin of the news should be selected by passing the
+        country code to the function.
+
+        :param country: string
+            code of country, news of which will be shown
+
+        :return: string
+            formatted string
+        '''
+
         import requests
 
-        #creating request to newsAPI
+        #Creating request to news API
         if country == 'ru':
             request_result = requests.get(
                 'https://newsapi.org/v2/top-headlines?country=ru&apiKey=7bc1b015bc614813ad32a62accce3cd1')
