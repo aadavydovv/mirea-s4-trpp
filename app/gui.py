@@ -8,6 +8,18 @@ import tkinter.font as tkfont
 
 
 class App:
+    """Creates a GUI.
+
+    Creates a GUI window using Tkinter which has all the possible actions a user can choose. After an action is
+    chosen - a window that presents possible countries to choose is created (except for the rate button - it takes you
+    straight to the next step). After that a result window is shown.
+
+    Attributes:
+        window_layer_0: Contains an action choice window widget.
+        window_layer_1: Contains a country choice (or - for the rate button - the result) window widget.
+        window_layer_2: Contains a result window widget.
+    """
+
     BUTTON_BG = '#767777'
     BUTTON_HEIGHT = 4
     BUTTON_WIDTH = 9
@@ -22,12 +34,23 @@ class App:
 
     # инициализация переменных окон
     def __init__(self):
+        """Initializes app attributes (windows)."""
         self.window_layer_0 = tk.Tk()
         self.window_layer_1 = None
         self.window_layer_2 = None
 
     # создание кнопки
     def make_button(self, text, master, action=None, font_size=12):
+        """Makes a button widget with provided parameters.
+
+        Args:
+            text: A text which will be displayed on a button.
+            master: A widget to which a button should belong.
+            action: An action which happens after clicking a button. Default is None.
+            font_size: A font size of a button's text. Default is 12.
+
+        Returns: A newly made button widget.
+        """
         font = tkfont.Font(size=font_size)
 
         button = tk.Button(master, text=text, width=self.BUTTON_WIDTH, height=self.BUTTON_HEIGHT, fg=self.FG,
@@ -40,11 +63,21 @@ class App:
 
     # создание надписи
     def make_label(self, text, master, font_size=18):
+        """Makes a label widget with provided parameters.
+
+        Args:
+            text: A text which will be displayed on a label.
+            master: A widget to which a label should belong.
+            font_size: A font size of a label's text. Default is 18.
+
+        Returns: A newly made label widget.
+        """
         font = tkfont.Font(size=font_size)
         return ttk.Label(master, text=text, foreground=self.FG, background=self.BG, font=font)
 
     # создание главного окна
     def make_window_layer_0(self):
+        """Configures (makes) an action choice (layer 0) window widget."""
         self.window_layer_0.configure(bg=self.BG)
         self.window_layer_0.resizable(False, False)
 
@@ -68,6 +101,13 @@ class App:
 
     # создания окна выбора страны или вывода курса
     def make_window_layer_1(self, action):
+        """Makes a country choice (layer 1) window widget.
+
+        Redirects to a result window creation if the "action" argument is "rate".
+
+        Args:
+            action: An action to which a result window will correspond.
+        """
         if self.window_layer_1:
             self.window_layer_1.destroy()
 
@@ -109,6 +149,15 @@ class App:
 
     # создание окна с ответом на запрос
     def make_window_result(self, action, layer_2=True):
+        """Makes a result window widget.
+
+        Args:
+            action: An action to which a result corresponds.
+            layer_2:
+                If True - a master for a window will be a country choice window.
+                If False - ...an action choice window.
+                Default is True.
+        """
         if self.window_layer_2:
             self.window_layer_2.destroy()
 
@@ -126,6 +175,10 @@ class App:
 
     # выполнение приложения
     def run(self):
+        """Runs an app.
+
+        Essentially, just makes and shows an action choice window.
+        """
         self.make_window_layer_0()
         self.window_layer_0.mainloop()
 
