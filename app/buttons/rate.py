@@ -2,12 +2,16 @@ import requests
 
 
 class ButtonRate:
+    """
+    Button action. Returns exchange rate statistics for two countries.
+    Exchange rates are taken from ratesapi.io
 
-    # действие кнопки; возвращает строку с курсом валюты выбранной страны
+    :rtype: str
+    :return: Formatted string
+    """
     @staticmethod
     def action():
 
-        # информацию об актуальных курсах обмена валют берем с сайта ratesapi.io
         url = 'https://api.ratesapi.io/api/latest?base=EUR'
 
         response = requests.get(url)
