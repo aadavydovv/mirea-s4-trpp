@@ -2,16 +2,17 @@ import requests
 
 
 class ButtonRate:
-    """
-    Button action. Returns exchange rate statistics for two countries.
-    Exchange rates are taken from ratesapi.io
-
-    :rtype: str
-    :return: Formatted string
-    """
+    """Contains a button's action."""
     @staticmethod
     def action():
+        """
+        Returns exchange rate statistics for two countries.
 
+        Exchange rates are taken from ratesapi.io
+
+        :rtype: str
+        :return: Formatted string
+        """
         url = 'https://api.ratesapi.io/api/latest?base=EUR'
 
         response = requests.get(url)
