@@ -10,8 +10,8 @@ class ButtonCovid:
         
         COVID-19 statistics are taken from covid19api.com
 
-        :param country: str
-            A country code
+        :param country: A country code
+        :type country: str
 
         :rtype: str
         :returns: Formatted string
