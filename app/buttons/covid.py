@@ -2,12 +2,17 @@ import requests
 
 
 class ButtonCovid:
-
-    # действие кнопки; возвращает строку со статистикой COVID-19 по выбранной стране
     @staticmethod
     def action(country):
+        """
+        Button action. Returns COVID-19 statistics by country.
+        COVID-19 statistics are taken from covid19api.com
 
-        # актуальные данные по COVID-19 берем с сайта covid19api.com
+        :param country: country code
+
+        :rtype: str
+        :return: Formatted string
+        """
         url_ru = 'https://api.covid19api.com/total/country/russia'
         url_de = 'https://api.covid19api.com/total/country/germany'
 
@@ -18,7 +23,7 @@ class ButtonCovid:
             response = requests.get(url_de)
         data = response.json()
 
-        # берём последнюю известную информацию из json файла
+        # take latest info from json file
         for key in data[-1]:
             output.append(data[-1][key])
 
