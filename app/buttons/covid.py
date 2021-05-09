@@ -2,16 +2,19 @@ import requests
 
 
 class ButtonCovid:
+    """Contains a button's action."""
     @staticmethod
     def action(country):
         """
-        Button action. Returns COVID-19 statistics by country.
+        Returns COVID-19 statistics by country.
+        
         COVID-19 statistics are taken from covid19api.com
 
-        :param country: country code
+        :param country: str
+            A country code
 
         :rtype: str
-        :return: Formatted string
+        :returns: Formatted string
         """
         url_ru = 'https://api.covid19api.com/total/country/russia'
         url_de = 'https://api.covid19api.com/total/country/germany'
