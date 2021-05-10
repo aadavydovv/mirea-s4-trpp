@@ -1,7 +1,7 @@
-from buttons.covid import ButtonCovid
-from buttons.news import ButtonNews
-from buttons.rate import ButtonRate
-from buttons.weather import ButtonWeather
+from .buttons.covid import ButtonCovid
+from .buttons.news import ButtonNews
+from .buttons.rate import ButtonRate
+from .buttons.weather import ButtonWeather
 from tkinter import ttk
 import tkinter as tk
 import tkinter.font as tkfont
@@ -15,9 +15,9 @@ class App:
     straight to the next step). After that a result window is shown.
 
     Attributes:
-        window_layer_0: Contains an action choice window widget.
-        window_layer_1: Contains a country choice (or - for the rate button - the result) window widget.
-        window_layer_2: Contains a result window widget.
+        window_layer_0 (tkinter.Tk): Contains an action choice window widget.
+        window_layer_1 (tkinter.Toplevel): Contains a country choice (or - for the rate button - the result) window widget.
+        window_layer_2 (tkinter.Toplevel): Contains a result window widget.
     """
 
     BUTTON_BG = '#767777'
@@ -44,12 +44,13 @@ class App:
         """Makes a button widget with provided parameters.
 
         Args:
-            text: A text which will be displayed on a button.
+            text (str): A text which will be displayed on a button.
             master: A widget to which a button should belong.
             action: An action which happens after clicking a button. Default is None.
-            font_size: A font size of a button's text. Default is 12.
+            font_size (int): A font size of a button's text. Default is 12.
 
-        Returns: A newly made button widget.
+        Returns:
+            tkinter.Button: A newly made button widget.
         """
         font = tkfont.Font(size=font_size)
 
@@ -66,11 +67,12 @@ class App:
         """Makes a label widget with provided parameters.
 
         Args:
-            text: A text which will be displayed on a label.
+            text (str): A text which will be displayed on a label.
             master: A widget to which a label should belong.
-            font_size: A font size of a label's text. Default is 18.
+            font_size (int): A font size of a label's text. Default is 18.
 
-        Returns: A newly made label widget.
+        Returns:
+            tkinter.ttk.Label: A newly made label widget.
         """
         font = tkfont.Font(size=font_size)
         return ttk.Label(master, text=text, foreground=self.FG, background=self.BG, font=font)
@@ -152,8 +154,9 @@ class App:
         """Makes a result window widget.
 
         Args:
-            action: An action to which a result corresponds.
-            layer_2:
+            action:
+                An action to which a result corresponds.
+            layer_2 (bool):
                 If True - a master for a window will be a country choice window.
                 If False - ...an action choice window.
                 Default is True.
@@ -181,7 +184,3 @@ class App:
         """
         self.make_window_layer_0()
         self.window_layer_0.mainloop()
-
-
-if __name__ == '__main__':
-    App().run()
