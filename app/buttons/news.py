@@ -1,20 +1,20 @@
 class ButtonNews:
+    """Contains a button's action."""
     @staticmethod
     def action(country):
-
-        '''
+        """
         Returns formatted string with news
 
         Returns formatted string with five news headlines from NEWS API.
         Country of origin of the news should be selected by passing the
         country code to the function.
 
-        :param country: string
-            code of country, news of which will be shown
+        :param country: Code of country, news of which will be shown
+        :type country: str
 
-        :return: string
-            formatted string
-        '''
+        :rtype: str
+        :return: Formatted string
+        """
 
         import requests
 
