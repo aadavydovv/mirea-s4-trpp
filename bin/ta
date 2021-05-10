@@ -1,3 +1,49 @@
 #!/bin/sh
 
-python3 "$(dirname "$0")/../app/gui.py"
+DIR_BUILD="$(dirname "$0")"/..
+DIR_DOCS=/tmp/travel_assistant_docs
+
+if [ "$1" = 'run' ]; then
+  echo 'starting up docker container'
+
+  docker build --tag travel-assistant "$DIR_BUILD" > /dev/null 2>&1
+
+  xhost + > /dev/null 2>&1
+  container_id=$(docker run -dit -v /tmp/.X11-unix:/tmp/.X11-unix travel-assistant sh) > /dev/null 2>&1
+
+  echo 'preparing app'
+  docker exec "$container_id" sh -c "python -m build" > /dev/null 2>&1
+  docker exec "$container_id" sh -c "pip install dist/*whl" > /dev/null 2>&1
+
+  echo 'running app'
+  docker exec -e DISPLAY="unix$DISPLAY" "$container_id" sh -c "python -m travel_assistant" > /dev/null 2>&1
+
+  echo 'stopping container'
+  docker stop "$container_id" > /dev/null 2>&1
+  xhost - > /dev/null 2>&1
+
+elif [ "$1" = 'doc' ]; then
+  echo 'starting up docker container'
+  docker build --tag travel-assistant "$DIR_BUILD" > /dev/null 2>&1
+  container_id=$(docker run -dit -v /tmp/.X11-unix:/tmp/.X11-unix travel-assistant sh) > /dev/null 2>&1
+
+  echo 'preparing documentation'
+
+  docker exec "$container_id" sh -c "python setup.py build_sphinx" > /dev/null 2>&1
+  docker cp "$container_id:/workdir/build/sphinx" "$DIR_DOCS"_temp > /dev/null 2>&1
+
+  rm -rf "$DIR_DOCS" > /dev/null 2>&1
+  mv -f "$DIR_DOCS"_temp "$DIR_DOCS" > /dev/null 2>&1
+
+  echo 'opening documentation'
+
+  if which xdg-open > /dev/null 2>&1; then
+    xdg-open "$DIR_DOCS/html/index.html" > /dev/null 2>&1
+
+  elif which gnome-open > /dev/null 2>&1; then
+    gnome-open "$DIR_DOCS/html/index.html" > /dev/null 2>&1
+  fi
+
+else
+  echo 'incorrect action'
+fi
