@@ -1,19 +1,20 @@
 class ButtonWeather:
+    """Contains a button's action."""
     @staticmethod
 
     def action(country):
-
-        '''
+        """
         Returns formatted string with weather
 
         Returns formatted string with weather from Aeris API.
         The location is determined by passing the country code to the function.
 
-        :param country: string
-            code of country from where the weather will be shown
-        :return: string
-            formatted string
-        '''
+        :param country: Code of country from where the weather will be shown
+        :type country: str
+
+        :rtype: str
+        :return: Formatted string
+        """
 
         import requests
 
